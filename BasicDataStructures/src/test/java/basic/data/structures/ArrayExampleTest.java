@@ -28,10 +28,17 @@ class ArrayExampleTest {
     void oddsArrayTest() {
         ArrayExample testClassForArray = new ArrayExample();
 
-        testClassForArray.setArrayOfNumbers(testClassForArray.oddsArray(20));
-        assertArrayEquals(testingArray, testClassForArray.getArrayOfNumbers());
+        testClassForArray.setArray(testClassForArray.oddsArray(20));
+        assertArrayEquals(testingArray, testClassForArray.getArray());
 
-        testClassForArray.getArrayOfNumbers()[0] = 0;
-        assertNotEquals(testingArray, testClassForArray.getArrayOfNumbers());
+        testClassForArray.getArray()[0] = 0;
+        assertNotEquals(testingArray, testClassForArray.getArray());
+
+        testClassForArray = new ArrayExample(2, 4, 6, 8, 10, 12, 14, 16, 18, 20);
+        assertArrayEquals(testingArray, testClassForArray.getArray());
+
+        boolean delete = testClassForArray.deleteByIndex(0);
+        assertTrue(delete);
+        assertArrayEquals(Stream.of(4, 6, 8, 10, 12, 14, 16, 18, 20).toArray(Integer[]::new), testClassForArray.getArray());
     }
 }
