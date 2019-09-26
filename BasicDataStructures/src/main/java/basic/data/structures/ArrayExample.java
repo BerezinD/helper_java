@@ -6,6 +6,7 @@ public class ArrayExample {
     private Integer[] array;
 
     ArrayExample() {
+        array = new Integer[0];
     }
 
     ArrayExample(Integer... numbers) {
@@ -27,7 +28,7 @@ public class ArrayExample {
     }
 
     public boolean deleteByIndex(int index) {
-        if (index < 0 || index > array.length) {
+        if (index < 0 || index > array.length-1) {
             return false;
         } else {
             Integer[] result = new Integer[array.length - 1];
