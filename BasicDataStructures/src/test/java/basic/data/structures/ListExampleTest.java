@@ -4,9 +4,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 public class ListExampleTest {
 
@@ -33,11 +31,11 @@ public class ListExampleTest {
 
     @Test
     void vectorTest() {
-
+        listForTesting = new Vector();
     }
 
     @Test
     void stackTest() {
-
+        listForTesting = new Stack();
     }
 }
