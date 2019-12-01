@@ -10,7 +10,6 @@ public class Fibonacci {
     public long fastFibonacciDoubling(int n) {
         long a = 0;
         long b = 1;
-        int m = 0;
         for (int bit = Integer.highestOneBit(n); bit != 0; bit >>>= 1) {
             // Loop invariant: a = F(m), b = F(m+1)
 
@@ -19,14 +18,12 @@ public class Fibonacci {
             long e = (a*a)+(b*b);
             a = d;
             b = e;
-            m *= 2;
 
             // Advance by one conditionally
             if ((n & bit) != 0) {
                 long c = a+b;
                 a = b;
                 b = c;
-                m++;
             }
         }
         return a;
@@ -34,7 +31,7 @@ public class Fibonacci {
 
     public static void main(String[] args) {
         Fibonacci helper = new Fibonacci();
-        System.out.println(helper.fastFibonacciDoubling(100));
+        System.out.println(helper.fastFibonacciDoubling(1000000));
         System.out.println(helper.fibFormula(100));
     }
 }
