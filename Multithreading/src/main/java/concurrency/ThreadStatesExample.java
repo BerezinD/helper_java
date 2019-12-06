@@ -23,6 +23,12 @@ public class ThreadStatesExample {
         // create another thread without specific name and start it
         Thread secondThreat = new Thread(runnablePrintInfo);
         secondThreat.start();
+        log.println("-------interrupted() example-------");
+        printCurrentThreadIsInterrupted();
+        Thread.currentThread().interrupt();
+        printCurrentThreadIsInterrupted();
+        printCurrentThreadIsInterrupted();
+        log.println("-------interrupted() example-------");
         // put main thread to sleep
         Thread.sleep(2000);
 
@@ -32,6 +38,22 @@ public class ThreadStatesExample {
 
         // print current thread info
         printThreadInfo(Thread.currentThread());
+
+        // join() example:
+        CountingThread countOne = new CountingThread("countOne");
+        CountingThread countTwo = new CountingThread("countTwo");
+        CountingThread countThree = new CountingThread("countThree");
+        // begin countdown!
+        countOne.start();
+        // then, wait until countOne thread is done
+        countOne.join();
+        // to this point we can't reach while countOne still running
+        countTwo.start();
+        countThree.start();
+    }
+
+    private static void printCurrentThreadIsInterrupted() {
+        log.println("Current thread is " + (Thread.interrupted() ? "" : "not ") + "interrupted");
     }
 
     private static void printThreadInfo(Thread thread) {
