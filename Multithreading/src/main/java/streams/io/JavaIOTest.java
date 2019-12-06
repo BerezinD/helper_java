@@ -51,9 +51,8 @@ public class JavaIOTest {
             f = is.getChannel();
             f2 = fos.getChannel();
             ByteBuffer buf = ByteBuffer.allocateDirect(64 * 1024);
-            long len = 0;
 
-            while((len = f.read(buf)) != -1) {
+            while(f.read(buf) != -1) {
                 buf.flip();
                 f2.write(buf);
                 buf.clear();
