@@ -3,8 +3,8 @@ package concurrency;
 import static jdk.nashorn.internal.runtime.regexp.joni.Config.log;
 
 public class ShareVariableExample {
-    static private double a = 10;
-    static private double b;
+    private static double a = 10;
+    private static double b;
 
     public static void main(String[] args) {
         Runnable readAWriteB = () -> {
