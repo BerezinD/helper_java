@@ -32,6 +32,10 @@ public class JDBCExecutor {
             log.println(customerFromDB.toString());
             customerDAO.delete(customerFromDB.getId());
             log.println(customerDAO.findById(customerFromDB.getId()));
+
+            OrderDAO orderDAO = new OrderDAO(connection);
+            Order order = orderDAO.findById(1000);
+            log.println(order);
         } catch (SQLException e) {
             log.println(e.getMessage());
         }

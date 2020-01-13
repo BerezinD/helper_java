@@ -25,10 +25,11 @@ public class CustomerDAO extends DataAccessObject<Customer> {
 
     @Override
     public Customer findById(long id) {
-        Customer customer = new Customer();
+        Customer customer;
         try (PreparedStatement statement = this.connection.prepareStatement(GET_ONE)) {
             statement.setLong(1, id);
             try (ResultSet resultSet = statement.executeQuery()) {
+                customer = new Customer();
                 while (resultSet.next()) {
                     customer.setId(resultSet.getLong("customer_id"));
                     customer.setFirstName(resultSet.getString("first_name"));
