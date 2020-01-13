@@ -13,7 +13,10 @@ public class JDBCExecutor {
                         "postgres", "password");
         try (Connection connection = dataBaseConnectionManager.getConnection()) {
             CustomerDAO customerDAO = new CustomerDAO(connection);
-            Customer customer = customerDAO.findById(1000);
+            Customer customer = customerDAO.findById(10000);
+            log.println(customer.getFirstName() + " " + customer.getLastName());
+            customer.setFirstName("Georgii");
+            customerDAO.update(customer);
             log.println(customer.getFirstName() + " " + customer.getLastName());
         } catch (SQLException e) {
             log.println(e.getMessage());
