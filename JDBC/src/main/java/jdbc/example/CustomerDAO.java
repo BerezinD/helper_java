@@ -61,19 +61,20 @@ public class CustomerDAO extends DataAccessObject<Customer> {
         List<Customer> customers = new ArrayList<>();
         try (PreparedStatement statement = this.connection.prepareStatement(GET_ALL_LMT)) {
             statement.setInt(1, limit);
-            ResultSet resultSet = statement.executeQuery();
-            while (resultSet.next()) {
-                Customer customer = new Customer();
-                customer.setId(resultSet.getLong("customer_id"));
-                customer.setFirstName(resultSet.getString("first_name"));
-                customer.setLastName(resultSet.getString("last_name"));
-                customer.setEmail(resultSet.getString("email"));
-                customer.setPhone(resultSet.getString("phone"));
-                customer.setAddress(resultSet.getString("address"));
-                customer.setCity(resultSet.getString("city"));
-                customer.setState(resultSet.getString("state"));
-                customer.setZipCode(resultSet.getString("zipcode"));
-                customers.add(customer);
+            try (ResultSet resultSet = statement.executeQuery()) {
+                while (resultSet.next()) {
+                    Customer customer = new Customer();
+                    customer.setId(resultSet.getLong("customer_id"));
+                    customer.setFirstName(resultSet.getString("first_name"));
+                    customer.setLastName(resultSet.getString("last_name"));
+                    customer.setEmail(resultSet.getString("email"));
+                    customer.setPhone(resultSet.getString("phone"));
+                    customer.setAddress(resultSet.getString("address"));
+                    customer.setCity(resultSet.getString("city"));
+                    customer.setState(resultSet.getString("state"));
+                    customer.setZipCode(resultSet.getString("zipcode"));
+                    customers.add(customer);
+                }
             }
         } catch (SQLException e) {
             log.println(e.getMessage());
