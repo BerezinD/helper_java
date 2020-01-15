@@ -33,6 +33,10 @@ public class JDBCExecutor {
             log.println(customerFromDB.toString());
             customerDAO.delete(customerFromDB.getId());
             log.println(customerDAO.findById(customerFromDB.getId()));
+            log.println();
+
+            customerDAO.findAllSorted(20).forEach(log::println);
+            log.println();
 
             OrderDAO orderDAO = new OrderDAO(connection);
             Order order = orderDAO.findById(1000);
