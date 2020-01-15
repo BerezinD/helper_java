@@ -33,16 +33,18 @@ public class JDBCExecutor {
             log.println(customerFromDB.toString());
             customerDAO.delete(customerFromDB.getId());
             log.println(customerDAO.findById(customerFromDB.getId()));
-            log.println();
 
+            log.println("20 first customer, sorted:");
             customerDAO.findAllSorted(20).forEach(log::println);
-            log.println();
+            log.println("5 customer, page 3, sorted:");
+            customerDAO.findAllPaged(5, 3).forEach(log::println);
 
+            log.println();
             OrderDAO orderDAO = new OrderDAO(connection);
             Order order = orderDAO.findById(1000);
             log.println(order);
-            log.println();
 
+            log.println();
             List<Order> orders = orderDAO.getOrdersForCustomer(789);
             orders.forEach(log::println);
         } catch (SQLException e) {
