@@ -68,7 +68,7 @@ public class CustomerDAO extends DataAccessObject<Customer> {
 
     public List<Customer> findAllPaged(int limit, int pageNumber) {
         List<Customer> customers = new ArrayList<>();
-        int offset = (pageNumber-1)*limit;
+        int offset = (pageNumber - 1) * limit;
         limit = limit < 1 ? 10 : limit;
         try (PreparedStatement statement = this.connection.prepareStatement(GET_ALL_PAGED)) {
             statement.setInt(1, limit);
