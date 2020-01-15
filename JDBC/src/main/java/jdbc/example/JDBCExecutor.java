@@ -2,6 +2,7 @@ package jdbc.example;
 
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.List;
 
 import static jdk.nashorn.internal.runtime.regexp.joni.Config.log;
 
@@ -36,6 +37,10 @@ public class JDBCExecutor {
             OrderDAO orderDAO = new OrderDAO(connection);
             Order order = orderDAO.findById(1000);
             log.println(order);
+            log.println();
+
+            List<Order> orders = orderDAO.getOrdersForCustomer(789);
+            orders.forEach(log::println);
         } catch (SQLException e) {
             log.println(e.getMessage());
         }
