@@ -170,4 +170,18 @@ public class CustomerDAO extends DataAccessObject<Customer> {
             throw new IllegalArgumentException(e);
         }
     }
+
+    public List<String> getPrimaryKeys(String tableName) {
+        try {
+            ResultSet resultSet = connection.getMetaData().getPrimaryKeys(null, null, tableName);
+            List<String> primaryKeys = new ArrayList<>();
+            while (resultSet.next()) {
+                primaryKeys.add(resultSet.getString("COLUMN_NAME") + " === " + resultSet.getString("PK_NAME"));
+            }
+            return primaryKeys;
+        } catch (SQLException e) {
+            log.println(e.getMessage());
+            throw new IllegalArgumentException(e);
+        }
+    }
 }

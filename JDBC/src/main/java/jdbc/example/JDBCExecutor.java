@@ -47,6 +47,9 @@ public class JDBCExecutor {
             log.println();
             List<Order> orders = orderDAO.getOrdersForCustomer(789);
             orders.forEach(log::println);
+
+            log.println();
+            customerDAO.getPrimaryKeys("customer").forEach(log::println);
         } catch (SQLException e) {
             log.println(e.getMessage());
         }
