@@ -135,6 +135,7 @@ public class CustomerDAO extends DataAccessObject<Customer> {
     @Override
     public Customer create(Customer dto) {
         try (PreparedStatement statement = this.connection.prepareStatement(INSERT)) {
+            connection.setAutoCommit(false);
             statement.setString(1, dto.getFirstName());
             statement.setString(2, dto.getLastName());
             statement.setString(3, dto.getEmail());
@@ -143,10 +144,17 @@ public class CustomerDAO extends DataAccessObject<Customer> {
             statement.setString(6, dto.getCity());
             statement.setString(7, dto.getState());
             statement.setString(8, dto.getZipCode());
-            statement.execute();
+            statement.addBatch();
+            statement.executeBatch();
+            connection.commit();
             long id = this.getLastVal(CUSTOMER_SEQUENCE);
             return this.findById(id);
         } catch (SQLException e) {
+            try {
+                connection.rollback();
+            } catch (SQLException ex) {
+                log.println(ex.getMessage());
+            }
             log.println(e.getMessage());
             throw new IllegalArgumentException(e);
         }
